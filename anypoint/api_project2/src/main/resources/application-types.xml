@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="person" format="json">
+      <types:shape format="weave" example="api/person.json"><![CDATA[%dw 2.0
+
+type person = Array<{|  id: Number {"typeId": "int"},   firstname: String,   lastname: String,   date_of_birth: String,   address: String,   age: Number {"typeId": "int"}|}> {"example": "[{\\\"id\\\":1,\\\"firstname\\\":\\\"Souheil\\\",\\\"lastname\\\":\\\"Ben Slama\\\",\\\"date_of_birth\\\":\\\"1999-05-06\\\",\\\"address\\\":\\\"1999-05-06\\\",\\\"age\\\":23}]"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="names" format="json">
+      <types:shape format="weave" example="api/names.json"><![CDATA[%dw 2.0
+
+type names = {| users: Array<{| name: String |}> |} {"example": "{\\\"users\\\":[{\\\"name\\\":\\\"Name 1\\\"},{\\\"name\\\":\\\"Name 2\\\"}]}"}
+
+]]></types:shape>
+    </types:type>
+  </types:catalog>
+  <types:enrichment select="#8619abf9-4323-4b23-9bc9-596a6dae1648">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="person"/>
+        </types:message>
+      </types:input-event>
+      <types:output-event>
+        <types:message>
+          <types:payload type="names"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+</types:mule>
