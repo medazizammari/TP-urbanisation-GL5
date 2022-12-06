@@ -7,7 +7,6 @@ import (
 	"net/http"
 	"os"
 
-	_ "github.com/go-sql-driver/mysql"
 	"github.com/gorilla/mux"
 	_ "github.com/gorilla/mux"
 	"github.com/joho/godotenv"
@@ -22,7 +21,7 @@ func main() {
 	router := mux.NewRouter()
 	fs := http.FileServer(http.Dir("./public/"))
 	router.PathPrefix("/public/").Handler(http.StripPrefix("/public/", fs))
-	routes.RegisterPersonRoutes(router)
+	routes.RegisterAPIRoutes(router)
 
 	http.Handle("/", router)
 	c := cors.New(cors.Options{
