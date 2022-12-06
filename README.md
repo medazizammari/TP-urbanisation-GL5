@@ -24,14 +24,6 @@ Go to the project directory
  #### 3- Create Table called person
 
 
- ```bash
-  CREATE TABLE person (
-                id int primary key auto_increment,
-                firstname varchar(255), lastname varchar(255), date_of_birth date, address varchar(255)
-)
-
-```
-
 Run server
 
 ```bash
