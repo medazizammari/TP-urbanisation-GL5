@@ -1,5 +1,5 @@
 
-# Fabnamix Test - Backend - GoLang
+# Urbanization Test 
 
 
 
@@ -8,7 +8,7 @@
 Clone the project
 
 ```bash
-  git clone https://github.com/medazizammari/Fambnamix-Test-Backend-GoLang
+  git clone https://github.com/medazizammari/TP-urbanisation-GL5
 ```
 
 Go to the project directory
