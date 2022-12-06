@@ -1,0 +1,20 @@
+#%RAML 1.0
+title: displayDate
+version: v1
+baseUri: http://localhost:8084
+
+/displayDate:
+  post:
+    description: return full date
+    body :
+      application/json:
+        properties:
+          week_day: integer
+          month_day: integer
+          year_month: integer
+          year: integer
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include date.json

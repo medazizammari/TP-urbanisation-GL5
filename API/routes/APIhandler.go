@@ -25,6 +25,7 @@ type Month struct {
 
 func GetMonthOfYear(w http.ResponseWriter, r* http.Request) {
 	params := mux.Vars(r)
+    fmt.Println(params)
     var month *Month
 	switch params["id"] {
     case "1":
@@ -87,7 +88,7 @@ func GetMonthOfYear(w http.ResponseWriter, r* http.Request) {
 
 func GetDayOfWeek(w http.ResponseWriter, r* http.Request) {
 	params := mux.Vars(r)
-
+    fmt.Println(params)
     var day *Day
 
 	switch params["id"] {

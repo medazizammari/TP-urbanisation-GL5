@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="dayinp" format="json">
+      <types:shape format="weave" example="examples/dayinp-1.json"><![CDATA[%dw 2.0
+
+type dayinp = {|
+  week_day: Number {"typeId": "int"}, 
+  month_day: Number {"typeId": "int"}, 
+  year_month: Number {"typeId": "int"}, 
+  year: Number {"typeId": "int"}
+|} {"example": "{\\\"week_day\\\":2,\\\"month_day\\\":4,\\\"year_month\\\":5,\\\"year\\\":3}"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="week_day" format="json">
+      <types:shape format="weave" example="examples/week_day.json"><![CDATA[%dw 2.0
+
+type week_day = {| week_day: Number {"typeId": "int"} |} {"example": "{\\\"week_day\\\":2}"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="week_dayout" format="xml">
+      <types:example format="xml" element="day" location="examples/apiday.xml"/>
+    </types:type>
+    <types:type name="week_dayout_string" format="json">
+      <types:shape format="weave" example="examples/weekdayoutstring.json"><![CDATA[%dw 2.0
+
+type week_dayout_string = {| day: String |} {"example": "{\\\"day\\\":\\\"Monday\\\"}"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="month_out_string" format="json">
+      <types:shape format="weave" example="examples/monthout.json"><![CDATA[%dw 2.0
+
+type month_out_string = {| month: String |} {"example": "{\\\"month\\\":\\\"january\\\"}"}
+
+]]></types:shape>
+    </types:type>
+  </types:catalog>
+  <types:enrichment select="#de30c074-7616-49c9-a2c3-d630f813e068">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="dayinp"/>
+        </types:message>
+      </types:input-event>
+      <types:output-event>
+        <types:message>
+          <types:payload type="week_day"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#e8c5cdd3-826b-4495-af19-8d55d75fa494">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="week_dayout"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#4674195b-27b4-4a97-955c-0d6a70a7a719">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="week_dayout"/>
+        </types:message>
+      </types:input-event>
+      <types:output-event>
+        <types:message>
+          <types:payload type="week_dayout_string"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#80bbf61e-d76a-4a4b-b760-25b1e8ad8ec3">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="week_dayout"/>
+        </types:message>
+      </types:input-event>
+      <types:output-event>
+        <types:message>
+          <types:payload type="month_out_string"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+</types:mule>
